@@ -1,0 +1,24 @@
+﻿{
+  "manifest_version": 2,
+  "name": "memo - 刷个课",
+  "version": "1.0.0",
+  "description": "iRead 发现",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"],
+  "minimum_chrome_version": "6.0.0.0",
+  "browser_action": {
+    "default_icon": "logo_19.jpg",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [{
+    "matches": ["http://*/*"],
+    "js": ["jquery-1.7.1.js", "iread_ContentScripts.js"]
+  }]
+}
