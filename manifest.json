@@ -1,13 +1,9 @@
 ﻿{
   "manifest_version": 2,
   "name": "memo - 刷个课",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "iRead 发现",
-  "background": {
-    "scripts": ["background.js"]
-  },
   "permissions": [
-    "contextMenus",
     "storage",
     "tabs",
     "http://*/*",
