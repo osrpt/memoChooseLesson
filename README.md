@@ -1,4 +1,4 @@
-memoChooseLesson
+memo选课插件
 ================
 
-my girl friend choose her lesson
+女朋友选课用的一个google chrome小插件，可以自动刷课，可以设置想要的课程，循环刷新。
