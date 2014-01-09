@@ -1,0 +1,23 @@
+html, body {
+    font-family:'Microsoft Yahei';
+}
+#MCLmessage {
+    width: auto;
+    min-height: 20px;
+    max-height: 200px;
+    overflow: auto;
+    top:5px;
+    border-radius: 5px;
+    background-color: #04819E;
+    opacity: 0.85;
+    padding:0 2em;
+    margin:-8px -8px 0 -8px;
+}
+#MCLmessage p {
+    font-size: 14px;
+    color:#000;
+    margin:0.5em;
+}
+#frmtop {
+    display: none;
+}
