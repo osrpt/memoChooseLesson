@@ -1,11 +1,9 @@
-###memo选课插件
+##memo选课插件
 
 女朋友选课用的一个google chrome小插件，可以自动刷课，可以设置想要的课程，循环刷新。
 
-###Change Log
-
+##Change Log
 **v1.0.2**
-
 updateTime:2014-1-10
 
 1. 增加自动登录，首页自动填写账号密码登录
