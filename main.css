@@ -1,0 +1,15 @@
+.popup{
+    width:400px;
+    margin:10px 15px 5px;
+}
+
+.popup .setting{
+
+}
+
+.popup .setting .love,.hate{
+    width:300px;
+}
+
+.popup .footer{
+}

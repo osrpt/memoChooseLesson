@@ -1,11 +1,24 @@
 ﻿var url = window.location.href;
+if (localStorage.config === undefined) {
+    var config = {
+        love: '',
+        time: 0,
+        user: '',
+        pwd: ''
+    };
+    localStorage.config = JSON.stringify(config);
+}
+
+var config = JSON.parse(localStorage.config);
 
 if (url == 'http://202.115.133.161/') {
-    $('input[name="uname"]').val('201209020429');
-    $('input[name="upwd"]').val('123456');
-    $('input[value="登 录"').click();
+    if (config.user && config.pwd) {
+        $('input[name="uname"]').val(config.user);
+        $('input[name="upwd"]').val(config.pwd);
+        $('input[value="登 录"').click();
+    }
 } else {
-    $(document).ready(function() {
+    $(document).ready(function () {
         if (url.indexOf("202.115.133.161/login.php") != -1) {
             showNav();
         } else if (url.indexOf('sel_freesys/sel_freesys.php') != -1) {
@@ -13,48 +26,40 @@ if (url == 'http://202.115.133.161/') {
             var key_love = "key_love";
             var key_host = "key_host";
             var key_time = "key_time";
-            var storage = chrome.storage.local;
-            storage.get(key_data, function(res) {
-                var result = res[key_data] || {
-                    key_love: '',
-                    key_time: 1000
-                };
-                var love = result[key_love] || '';
-                var time = result[key_time] || 10;
-                var loveLess = love.split(',');
-                var heat = new Array(44, 82, 149, 7, 103, 94, 105);
-                showMsg("恭喜你，成功进入强刷系统，本系统将 " + time + " 秒钟自动刷一次课");
-                showMsg("配置信息：选择以下编号的课程=>" + love + " 间隔时间：" + time + "秒");
-                if (love == '') {
-                    showMsg("你当前没有配置想选的课，系统将尝试所有可以选择的课");
-                }
-                showMsg("注意：表格中只展示可选的和已选的课程");
-                $(":checkbox").each(function() {
-                    var input = $(this);
-                    var num = parseInt(input.parents("td").siblings("td:eq(0)").html());
-                    var required = parseInt(input.parents("td").siblings("td:eq(9)").html());
-                    var now = parseInt(input.parents("td").siblings("td:eq(10)").html());
-                    var name = input.parents("td").siblings("td:eq(2)").html();
-                    if (love == '' && required > 0 && now < required) {
-                        var text = input.attr("onclick");
-                        var result = text.match(/\'[^']*\'/gi);
-                        if (result.length = 4) {
-                            chooseLess(result[0], result[1], result[2], name);
-                        }
-                    } else if (loveLess.indexOf(num.toString()) != -1) {
-                        var text = input.attr("onclick");
-                        var result = text.match(/\'[^']*\'/gi);
-                        if (result.length = 4) {
-                            chooseLess(result[0], result[1], result[2], name);
-                        }
-                    } else if (!input.is(":checked")) {
-                        input.parents("tr").hide();
+            var time = config.time || 10;
+            var loveLess = config.love.split(',');
+            var heat = config.heat.split(',');
+            showMsg("恭喜你，成功进入强刷系统，本系统将 " + time + " 秒钟自动刷一次课");
+            showMsg("配置信息：优先选择以下编号的课程=>" + love + " 间隔时间：" + time + "秒");
+            if (love == '') {
+                showMsg("你当前没有配置想选的课，系统将尝试所有可以选择的课");
+            }
+            showMsg("注意：表格中只展示可选的、想选的、已选的课程，其他课程隐藏。");
+            $(":checkbox").each(function () {
+                var input = $(this);
+                var num = parseInt(input.parents("td").siblings("td:eq(0)").html());
+                var required = parseInt(input.parents("td").siblings("td:eq(9)").html());
+                var now = parseInt(input.parents("td").siblings("td:eq(10)").html());
+                var name = input.parents("td").siblings("td:eq(2)").html();
+                if (love == '' && required > 0 && now < required) {
+                    var text = input.attr("onclick");
+                    var result = text.match(/\'[^']*\'/gi);
+                    if (result.length = 4) {
+                        chooseLess(result[0], result[1], result[2], name);
                     }
-                });
-                setTimeout(function() {
-                    window.location.reload();
-                }, time * 1000);
-            })
+                } else if (loveLess.indexOf(num.toString()) != -1) {
+                    var text = input.attr("onclick");
+                    var result = text.match(/\'[^']*\'/gi);
+                    if (result.length = 4) {
+                        chooseLess(result[0], result[1], result[2], name);
+                    }
+                } else if (!input.is(":checked")) {
+                    input.parents("tr").hide();
+                }
+            });
+            setTimeout(function () {
+                window.location.reload();
+            }, time * 1000);
         }
     })
 
@@ -63,7 +68,7 @@ if (url == 'http://202.115.133.161/') {
             kcbh: a.replace(/\'/gi, ""),
             jxbh: b.replace(/\'/gi, ""),
             zy: c.replace(/\'/gi, "")
-        }, function(res) {
+        }, function (res) {
             if (res.indexOf('操作失败') != -1) {
                 var result = res.match(/[任选课程][^<]*/gi);
                 if (result.length > 0) {
@@ -97,13 +102,8 @@ function showMsg(msg) {
         msgDiv.prependTo($('body'));
     }
     var msgP = $('<p></p>');
-    msgP.html(msg);
+    msgP.html(getTime() + "=>" + msg);
     msgP.prependTo($("#MCLmessage"));
-    // $("#message").html(msg);
-    // alert($("#message"));
-    // var time = new Date();
-    // var msg = '<tr style="margin:2px 10px;"><td style="color:#e6a000;padding:5px;" colspan="14">' + getTime() + "=>" + msg + '</td></tr>'
-    // $("tbody").prepend(msg);
 }
 
 /**

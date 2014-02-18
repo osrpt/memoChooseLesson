@@ -1,8 +1,8 @@
 ﻿{
     "manifest_version": 2,
-    "name": "memo - 刷个课",
+    "name": "成都理工大学选课自助选课系统",
     "version": "1.0.2",
-    "description": "iRead 发现",
+    "description": "自动刷课，自动登录，可以随意设置想要的课程，不利用任何漏洞，安全无公害",
     "permissions": [
         "storage",
         "tabs",
@@ -21,5 +21,6 @@
         "matches": ["http://202.115.133.161/*"],
         "js": ["jquery-1.7.1.js", "contentScript.js"],
         "css": ["style.css"]
-    }]
+    }],
+    "web_accessible_resources": ["bootstrap.min.css", "main.css"]
 }
