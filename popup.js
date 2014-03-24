@@ -1,6 +1,6 @@
-$(document).ready(function () {
+$(document).ready(function() {
     //201209020429
-    if (true || localStorage.config === undefined) {
+    if (localStorage.config === undefined) {
         var config = {
             love: '',
             heat: '',
@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     console.log(config.love);
 
-    $("#save").click(function () {
+    $("#save").click(function() {
         var love = $("#love").val();
         var time = $("#time").val();
         var user = $("#user").val();

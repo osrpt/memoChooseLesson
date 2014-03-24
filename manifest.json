@@ -22,5 +22,9 @@
         "js": ["jquery-1.7.1.js", "contentScript.js"],
         "css": ["style.css"]
     }],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
     "web_accessible_resources": ["bootstrap.min.css", "main.css"]
 }
