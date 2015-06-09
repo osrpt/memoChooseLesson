@@ -2,6 +2,8 @@
 
 成都理工大学强刷选修课用的一个google chrome小插件，可以自动刷课，可以设置想要的课程，循环刷新。
 
+*For my girlfriend with love. :)*
+
 ##Change Log
 ###v1.0.4 2014-3-24
 1. 修改bug，可以正常保存登录信息并自动登录了
